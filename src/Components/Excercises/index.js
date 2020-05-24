@@ -8,7 +8,7 @@ export default props => {
   };
   return (
     <div>
-      <Grid container spacing="3">
+      <Grid container spacing={3}>
         <Grid item sm>
           <LeftPane styles={styles} />
         </Grid>

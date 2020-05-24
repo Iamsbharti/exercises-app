@@ -1,13 +1,14 @@
 import React from "react";
 import { Paper, Tab, Tabs } from "@material-ui/core";
-export default function Footer() {
+export default function Footer({ muscles }) {
   return (
     <div>
       <Paper>
         <Tabs value={0} indicatorColor="primary" textColor="primary" centered>
-          <Tab label="One" />
-          <Tab label="Two" />
-          <Tab label="Three" />
+          <Tab label="All" />
+          {muscles.map((muscle, index) => (
+            <Tab id={index} label={muscle} />
+          ))}
         </Tabs>
       </Paper>
     </div>
