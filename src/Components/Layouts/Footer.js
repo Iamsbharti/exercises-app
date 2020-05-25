@@ -7,7 +7,7 @@ export default function Footer({ muscles }) {
         <Tabs value={0} indicatorColor="primary" textColor="primary" centered>
           <Tab label="All" />
           {muscles.map((muscle, index) => (
-            <Tab id={index} label={muscle} />
+            <Tab key={index} label={muscle} />
           ))}
         </Tabs>
       </Paper>
