@@ -8,7 +8,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-export default ({ excercises }) => {
+export default ({ excercises, category }) => {
   const styles = {
     Paper: {
       padding: 20,
@@ -23,23 +23,25 @@ export default ({ excercises }) => {
       <Grid container spacing={3}>
         <Grid item sm>
           <Paper style={styles.Paper}>
-            {excercises.map(([group, excercise]) => (
-              <Fragment>
-                <Typography
-                  variant="h6"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {group}
-                </Typography>
-                <List component="ul">
-                  {excercise.map(({ title }) => (
-                    <ListItem button>
-                      <ListItemText primary={title} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Fragment>
-            ))}
+            {excercises.map(([group, excercise]) =>
+              !category || category === group ? (
+                <Fragment key={group}>
+                  <Typography
+                    variant="h6"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {group}
+                  </Typography>
+                  <List component="ul">
+                    {excercise.map(({ title, id }) => (
+                      <ListItem button key={id}>
+                        <ListItemText primary={title} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Fragment>
+              ) : null
+            )}
           </Paper>
         </Grid>
         <Grid item sm>

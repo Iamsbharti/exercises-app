@@ -6,6 +6,7 @@ import { exercises, muscles } from "../store";
 
 export default function App() {
   const [excerciseList, setExcercise] = useState(exercises);
+  const [category, setCategory] = useState("");
 
   const getExerciseByMuscle = () => {
     return Object.entries(
@@ -18,13 +19,20 @@ export default function App() {
       }, {})
     );
   };
+  const handleCategory = _category => {
+    setCategory(_category);
+  };
   const _excerise = getExerciseByMuscle();
 
   return (
     <Fragment>
       <Header />
-      <Excercise excercises={_excerise} />
-      <Footer muscles={muscles} />
+      <Excercise excercises={_excerise} category={category} />
+      <Footer
+        muscles={muscles}
+        category={category}
+        setCategory={handleCategory}
+      />
     </Fragment>
   );
 }
