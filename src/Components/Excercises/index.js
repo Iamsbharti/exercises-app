@@ -8,7 +8,16 @@ import {
   Typography
 } from "@material-ui/core";
 
-export default ({ excercises, category }) => {
+export default ({
+  excercises,
+  category,
+  getExcercise,
+  excercise: {
+    id,
+    title = "Welcome!!",
+    description = "Please select a item from Left Pane"
+  }
+}) => {
   const styles = {
     Paper: {
       padding: 20,
@@ -34,7 +43,11 @@ export default ({ excercises, category }) => {
                   </Typography>
                   <List component="ul">
                     {excercise.map(({ title, id }) => (
-                      <ListItem button key={id}>
+                      <ListItem
+                        button
+                        key={id}
+                        onClick={() => getExcercise(id)}
+                      >
                         <ListItemText primary={title} />
                       </ListItem>
                     ))}
@@ -46,9 +59,9 @@ export default ({ excercises, category }) => {
         </Grid>
         <Grid item sm>
           <Paper style={styles.Paper}>
-            <Typography variant="h4">Welcome!!</Typography>
+            <Typography variant="h4">{title}</Typography>
             <Typography variant="h6" style={{ marginTop: "20" }}>
-              Please select a item from Left
+              {description}
             </Typography>
           </Paper>
         </Grid>

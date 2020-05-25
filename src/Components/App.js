@@ -5,9 +5,11 @@ import Excercise from "./Excercises";
 import { exercises, muscles } from "../store";
 
 export default function App() {
-  const [excerciseList, setExcercise] = useState(exercises);
+  const [excerciseList, setExcercises] = useState(exercises);
   const [category, setCategory] = useState("");
+  const [excercise, setExcercise] = useState({});
 
+  //reduce the excerises list based on the muscles type
   const getExerciseByMuscle = () => {
     return Object.entries(
       excerciseList.reduce((excercises, excercise) => {
@@ -19,15 +21,29 @@ export default function App() {
       }, {})
     );
   };
+
+  //set the category and pass it to the excercise component to display accordingly
   const handleCategory = _category => {
     setCategory(_category);
   };
-  const _excerise = getExerciseByMuscle();
+
+  //find the excericise selected from footer to display it's details on Right Pane
+  const handleGetExcercise = id => {
+    const _excerise = excerciseList.find(exer => exer.id === id);
+    setExcercise(_excerise);
+  };
+  //call
+  const _excerises = getExerciseByMuscle();
 
   return (
     <Fragment>
       <Header />
-      <Excercise excercises={_excerise} category={category} />
+      <Excercise
+        excercises={_excerises}
+        category={category}
+        getExcercise={handleGetExcercise}
+        excercise={excercise}
+      />
       <Footer
         muscles={muscles}
         category={category}
