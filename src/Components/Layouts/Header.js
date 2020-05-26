@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import CreateExcercise from "../Excercises/Dailog/CreateExcercise";
-export default function Header() {
+export default function Header({ muscles }) {
   return (
     <div>
       <AppBar position="static">
@@ -9,7 +9,7 @@ export default function Header() {
           <Typography variant="h6" style={{ flex: 1 }}>
             Excercises
           </Typography>
-          <CreateExcercise />
+          <CreateExcercise muscles={muscles} />
         </Toolbar>
       </AppBar>
     </div>

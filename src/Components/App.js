@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <Fragment>
-      <Header />
+      <Header muscles={muscles} />
       <Excercise
         excercises={_excerises}
         category={category}
