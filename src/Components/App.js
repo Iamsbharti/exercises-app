@@ -23,21 +23,26 @@ export default function App() {
   };
 
   //set the category and pass it to the excercise component to display accordingly
-  const handleCategory = _category => {
+  const handleCategory = (_category) => {
     setCategory(_category);
   };
 
   //find the excericise selected from footer to display it's details on Right Pane
-  const handleGetExcercise = id => {
-    const _excerise = excerciseList.find(exer => exer.id === id);
+  const handleGetExcercise = (id) => {
+    const _excerise = excerciseList.find((exer) => exer.id === id);
     setExcercise(_excerise);
   };
+  //create new excericise
+  const handleCreateExcercise = (newExercise) => {
+    setExcercises([...excerciseList, newExercise]);
+  };
+
   //call
   const _excerises = getExerciseByMuscle();
 
   return (
     <Fragment>
-      <Header muscles={muscles} />
+      <Header muscles={muscles} createExcercise={handleCreateExcercise} />
       <Excercise
         excercises={_excerises}
         category={category}

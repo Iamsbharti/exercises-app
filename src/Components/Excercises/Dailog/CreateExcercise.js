@@ -10,42 +10,55 @@ import {
   FormControl,
   Select,
   InputLabel,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
 export default class extends Component {
   state = {
     open: false,
-    excercise: {
-      name: "",
-      muscle: "",
-      description: ""
-    }
+    exercise: {
+      title: "",
+      muscles: "",
+      description: "",
+    },
   };
   handleToggle = () => {
     this.setState({
-      open: !this.state.open
+      open: !this.state.open,
     });
   };
   handleClose = () => {
     this.setState({
-      open: false
+      open: false,
     });
   };
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(`${name}-${value}`);
     this.setState({
-      excercise: {
-        ...this.state.excercise,
-        [name]: value
-      }
+      exercise: {
+        ...this.state.exercise,
+        [name]: value,
+      },
+    });
+  };
+  handleSubmit = () => {
+    this.setState({
+      open: false,
+    });
+    const { exercise } = this.state;
+    this.props.onCreate(exercise);
+    this.setState({
+      exercise: {
+        title: "",
+        muscles: "",
+        description: "",
+      },
     });
   };
 
   render() {
-    const { name, muscle, description } = this.state.excercise;
+    const { title, muscles, description } = this.state.exercise;
     const { muscles: categories } = this.props;
     return (
       <Fragment>
@@ -56,22 +69,22 @@ export default class extends Component {
           <DialogTitle>Create a new Excercise</DialogTitle>
           <DialogContent>
             <DialogContentText>Fill out the from</DialogContentText>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <TextField
-                name="name"
-                label="Name"
-                value={name}
+                name="title"
+                label="Title"
+                value={title}
                 onChange={this.handleChange}
               />
               <br />
               <FormControl>
                 <InputLabel>Muscle</InputLabel>
                 <Select
-                  name="muscle"
-                  value={muscle}
+                  name="muscles"
+                  value={muscles}
                   onChange={this.handleChange}
                 >
-                  {categories.map(group => (
+                  {categories.map((group) => (
                     <MenuItem key={group} value={group}>
                       {group}
                     </MenuItem>
@@ -90,7 +103,11 @@ export default class extends Component {
             </form>
           </DialogContent>
           <DialogActions>
-            <Button variant="outlined" color="primary">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.handleSubmit}
+            >
               Create
             </Button>
           </DialogActions>
