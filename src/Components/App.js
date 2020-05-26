@@ -8,7 +8,7 @@ export default function App() {
   const [excerciseList, setExcercises] = useState(exercises);
   const [category, setCategory] = useState("");
   const [excercise, setExcercise] = useState({});
-
+  console.log("store_exer", typeof excerciseList);
   //reduce the excerises list based on the muscles type
   const getExerciseByMuscle = () => {
     return Object.entries(
@@ -32,6 +32,7 @@ export default function App() {
     const _excerise = excerciseList.find((exer) => exer.id === id);
     setExcercise(_excerise);
   };
+
   //create new excericise
   const handleCreateExcercise = (newExercise) => {
     setExcercises([...excerciseList, newExercise]);
