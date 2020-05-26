@@ -18,8 +18,8 @@ export default class extends Component {
   state = {
     open: false,
     excercise: {
-      name: "",
-      muscle: "",
+      title: "",
+      muscles: "",
       description: ""
     }
   };
@@ -35,7 +35,6 @@ export default class extends Component {
   };
   handleChange = event => {
     const { name, value } = event.target;
-    console.log(`${name}-${value}`);
     this.setState({
       excercise: {
         ...this.state.excercise,
@@ -43,9 +42,22 @@ export default class extends Component {
       }
     });
   };
-
+  handleSubmit = () => {
+    this.setState({
+      open: false
+    });
+    const { excercise } = this.state;
+    this.props.onCreate(excercise);
+    this.setState({
+      excercise: {
+        title: "",
+        muscles: "",
+        description: ""
+      }
+    });
+  };
   render() {
-    const { name, muscle, description } = this.state.excercise;
+    const { title, muscles, description } = this.state.excercise;
     const { muscles: categories } = this.props;
     return (
       <Fragment>
@@ -56,19 +68,19 @@ export default class extends Component {
           <DialogTitle>Create a new Excercise</DialogTitle>
           <DialogContent>
             <DialogContentText>Fill out the from</DialogContentText>
-            <form onSubmit={this.handleSubmit}>
+            <form>
               <TextField
-                name="name"
-                label="Name"
-                value={name}
+                name="title"
+                label="Title"
+                value={title}
                 onChange={this.handleChange}
               />
               <br />
               <FormControl>
-                <InputLabel>Muscle</InputLabel>
+                <InputLabel>muscles</InputLabel>
                 <Select
-                  name="muscle"
-                  value={muscle}
+                  name="muscles"
+                  value={muscles}
                   onChange={this.handleChange}
                 >
                   {categories.map(group => (
@@ -90,7 +102,11 @@ export default class extends Component {
             </form>
           </DialogContent>
           <DialogActions>
-            <Button variant="outlined" color="primary">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.handleSubmit}
+            >
               Create
             </Button>
           </DialogActions>
