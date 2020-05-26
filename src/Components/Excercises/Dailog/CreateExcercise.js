@@ -17,19 +17,11 @@ import { Add } from "@material-ui/icons";
 export default class extends Component {
   state = {
     open: false,
-<<<<<<< HEAD
     exercise: {
       title: "",
       muscles: "",
       description: "",
     },
-=======
-    excercise: {
-      title: "",
-      muscles: "",
-      description: ""
-    }
->>>>>>> a53e793de6f77e978b88df939109e2f4b9732ed1
   };
   handleToggle = () => {
     this.setState({
@@ -66,7 +58,7 @@ export default class extends Component {
   };
   handleSubmit = () => {
     this.setState({
-      open: false
+      open: false,
     });
     const { excercise } = this.state;
     this.props.onCreate(excercise);
@@ -74,16 +66,12 @@ export default class extends Component {
       excercise: {
         title: "",
         muscles: "",
-        description: ""
-      }
+        description: "",
+      },
     });
   };
   render() {
-<<<<<<< HEAD
     const { title, muscles, description } = this.state.exercise;
-=======
-    const { title, muscles, description } = this.state.excercise;
->>>>>>> a53e793de6f77e978b88df939109e2f4b9732ed1
     const { muscles: categories } = this.props;
     return (
       <Fragment>
