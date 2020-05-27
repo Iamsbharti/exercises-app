@@ -37,6 +37,8 @@ export default function App() {
 
   //create new exercise
   const handleCreateExercise = (newExercise) => {
+      const id=newExercise.title.replace(/ /g,'-');
+      newExercise={...newExercise,id}
       setExercises([...exerciseList, newExercise]);
   };
 

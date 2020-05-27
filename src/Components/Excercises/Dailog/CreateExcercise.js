@@ -54,7 +54,9 @@ export default withStyles(styles) (class extends Component {
       open: false,
     });
     const { exercise } = this.state;
+    const id=exercise.title.replace(/ g/,'-');
     this.props.onCreate(exercise);
+
     this.setState({
       exercise: {
         title: "",
