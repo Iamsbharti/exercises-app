@@ -1,34 +1,18 @@
 import React, { Component, Fragment } from "react";
 import {
   Dialog,
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Button,
-  TextField,
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
-  withStyles
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import InputForm from "./InputForm";
 
-//styles
-const styles=(theme)=>({
-  FormControl:{
-    width:500
-  }
-})
-export default withStyles(styles) (class extends Component {
+
+export default  class extends Component {
   state = {
     open: false,
-    exercise: {
-      title: "",
-      muscles: "",
-      description: "",
-    },
   };
 
   handleToggle = () => {
@@ -41,48 +25,9 @@ export default withStyles(styles) (class extends Component {
       open: false,
     });
   };
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      exercise: {
-        ...this.state.exercise,
-        [name]: value,
-      },
-    });
-  };
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    });
-    const { exercise } = this.state;
 
-    this.props.onCreate(exercise);
-
-    this.setState({
-      exercise: {
-        title: "",
-        muscles: "",
-        description: "",
-      },
-    });
-  };
-  handleSubmit = () => {
-    this.setState({
-      open: false,
-    });
-    const { exercise } = this.state;
-    this.props.onCreate(exercise);
-    this.setState({
-      exercise: {
-        title: "",
-        muscles: "",
-        description: "",
-      },
-    });
-  };
   render() {
-    const { title, muscles, description } = this.state.exercise;
-    const { classes,muscles: categories } = this.props;
+    const {muscles,onCreate}=this.props
     return (
       <Fragment>
         <Button variant="contained" onClick={this.handleToggle}>
@@ -92,53 +37,10 @@ export default withStyles(styles) (class extends Component {
           <DialogTitle>Create a new Exercise</DialogTitle>
           <DialogContent>
             <DialogContentText>Fill out the from</DialogContentText>
-            <form>
-              <TextField
-                name="title"
-                label="Title"
-                value={title}
-                onChange={this.handleChange}
-                className={classes.FormControl}
-              />
-              <br />
-              <FormControl>
-                <InputLabel>muscles</InputLabel>
-                <Select
-                  name="muscles"
-                  value={muscles}
-                  onChange={this.handleChange}
-                  className={classes.FormControl}
-                >
-                  {categories.map((group) => (
-                    <MenuItem key={group} value={group}>
-                      {group}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <br />
-              <TextField
-                name="description"
-                label="Description"
-                value={description}
-                onChange={this.handleChange}
-                multiline
-                rows={4}
-                className={classes.FormControl}
-              />
-            </form>
+              <InputForm muscles={muscles} onCreate={onCreate} toggle={this.handleToggle}/>
           </DialogContent>
-          <DialogActions>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={this.handleSubmit}
-            >
-              Create
-            </Button>
-          </DialogActions>
         </Dialog>
       </Fragment>
     );
   }
-})
+}
