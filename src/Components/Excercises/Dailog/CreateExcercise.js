@@ -11,10 +11,16 @@ import {
   Select,
   InputLabel,
   MenuItem,
+  withStyles
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-
-export default class extends Component {
+//styles
+const styles=(theme)=>({
+  FormControl:{
+    width:500
+  }
+})
+export default withStyles(styles) (class extends Component {
   state = {
     open: false,
     exercise: {
@@ -23,6 +29,7 @@ export default class extends Component {
       description: "",
     },
   };
+
   handleToggle = () => {
     this.setState({
       open: !this.state.open,
@@ -72,7 +79,7 @@ export default class extends Component {
   };
   render() {
     const { title, muscles, description } = this.state.exercise;
-    const { muscles: categories } = this.props;
+    const { classes,muscles: categories } = this.props;
     return (
       <Fragment>
         <Button variant="contained" onClick={this.handleToggle}>
@@ -88,6 +95,7 @@ export default class extends Component {
                 label="Title"
                 value={title}
                 onChange={this.handleChange}
+                className={classes.FormControl}
               />
               <br />
               <FormControl>
@@ -96,6 +104,7 @@ export default class extends Component {
                   name="muscles"
                   value={muscles}
                   onChange={this.handleChange}
+                  className={classes.FormControl}
                 >
                   {categories.map((group) => (
                     <MenuItem key={group} value={group}>
@@ -112,6 +121,7 @@ export default class extends Component {
                 onChange={this.handleChange}
                 multiline
                 rows={4}
+                className={classes.FormControl}
               />
             </form>
           </DialogContent>
@@ -128,4 +138,4 @@ export default class extends Component {
       </Fragment>
     );
   }
-}
+})
