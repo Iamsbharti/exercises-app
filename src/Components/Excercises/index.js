@@ -19,6 +19,7 @@ export default ({
   setExercise,
   exercise,
   editExercise,
+  editMode,
   exercise: {
     id,
     title = "Welcome!!",
@@ -26,7 +27,7 @@ export default ({
   },
     onDelete
 }) => {
-    const [editMode,setEditMode]=useState(false)
+
 
   const styles = {
     Paper: {
@@ -41,7 +42,6 @@ export default ({
     onDelete(id)
   }
   const handleEdit=(id)=>{
-      setEditMode(true)
       console.log('edit')
       setExercise(id)
   }

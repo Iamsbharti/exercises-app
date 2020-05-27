@@ -8,6 +8,7 @@ export default function App() {
   const [exerciseList, setExercises] = useState(exercises);
   const [category, setCategory] = useState("");
   const [exercise, setExercise] = useState({});
+  const [editMode,setEditMode] =  useState(false);
 
   //reduce the exercises list based on the muscles type
   const getExerciseByMuscle = () => {
@@ -33,6 +34,7 @@ export default function App() {
   const handleGetExercise = (id) => {
     const _exercise = exerciseList.find((exer) => exer.id === id);
     setExercise(_exercise);
+    setEditMode(false)
   };
 
   //create new exercise
@@ -48,6 +50,7 @@ export default function App() {
      const handleSetExercise=(id)=>{
         const selectedExercise= exerciseList.find(exercise=> exercise.id===id)
          setExercise(selectedExercise)
+         setEditMode(true)
      }
      //edit exercise
     const handleEditExercise=(_newExercise)=>{
@@ -68,6 +71,7 @@ export default function App() {
         exercise={exercise}
         onDelete={handleDeleteExercise}
         setExercise={handleSetExercise}
+        editMode={editMode}
         editExercise={handleEditExercise}
       />
       <Footer
