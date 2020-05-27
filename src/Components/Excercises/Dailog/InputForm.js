@@ -13,7 +13,8 @@ import {
 //styles
 const styles=(theme)=>({
     FormControl:{
-        width:500
+        width:300,
+        marginTop:10
     }
 })
 export default withStyles(styles) (class extends Component {
@@ -46,13 +47,7 @@ export default withStyles(styles) (class extends Component {
         const { ...exercise } = this.state;
         const id=exercise.title.replace(/ /g,'-');
         this.props.onSubmit({...exercise,id});
-        this.setState({
-            exercise: {
-                title: "",
-                muscles: "",
-                description: "",
-            },
-        });
+        this.initialState()
     };
     render(){
         const { title, muscles, description } = this.state;
@@ -70,7 +65,7 @@ export default withStyles(styles) (class extends Component {
                     />
                     <br />
                     <FormControl>
-                        <InputLabel>muscles</InputLabel>
+                        <InputLabel>Muscles</InputLabel>
                         <Select
                             name="muscles"
                             value={muscles}
@@ -101,7 +96,7 @@ export default withStyles(styles) (class extends Component {
                             onClick={this.handleSubmit}
                             style={{marginTop:15}}
                         >
-                            Create
+                            {this.state.title ?"Edit":"Create"}
                         </Button>
                 </form>
             </Fragment>
