@@ -37,7 +37,7 @@ export default  class extends Component {
           <DialogTitle>Create a new Exercise</DialogTitle>
           <DialogContent>
             <DialogContentText>Fill out the from</DialogContentText>
-              <InputForm muscles={muscles} onCreate={onCreate} toggle={this.handleToggle}/>
+              <InputForm muscles={muscles} onSubmit={onCreate} toggle={this.handleToggle}/>
           </DialogContent>
         </Dialog>
       </Fragment>

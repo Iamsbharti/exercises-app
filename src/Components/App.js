@@ -10,8 +10,6 @@ export default function App() {
   const [exercise, setExercise] = useState({});
 
   //reduce the exercises list based on the muscles type
-    //console.log(exerciseList)
-
   const getExerciseByMuscle = () => {
     const initExercises=muscles.reduce((exercises,category)=>({
         ...exercises,
@@ -39,8 +37,6 @@ export default function App() {
 
   //create new exercise
   const handleCreateExercise = (newExercise) => {
-      const id=newExercise.title.replace(/ /g,'-');
-      newExercise={...newExercise,id}
       setExercises([...exerciseList, newExercise]);
   };
   //delete exercise
@@ -48,6 +44,17 @@ export default function App() {
         const deletedExercise=exerciseList.filter(exe=> exe.id!==id)
         setExercises(deletedExercise)
     }
+    //set exercise for edit mode
+     const handleSetExercise=(id)=>{
+        const selectedExercise= exerciseList.find(exercise=> exercise.id===id)
+         setExercise(selectedExercise)
+     }
+     //edit exercise
+    const handleEditExercise=(_newExercise)=>{
+        const editedExercise=exerciseList.filter(exercise=> exercise.id!==_newExercise.id)
+        setExercises([...editedExercise,_newExercise])
+    }
+
   //call
   const _exercises = getExerciseByMuscle();
 
@@ -60,6 +67,8 @@ export default function App() {
         getExercise={handleGetExercise}
         exercise={exercise}
         onDelete={handleDeleteExercise}
+        setExercise={handleSetExercise}
+        editExercise={handleEditExercise}
       />
       <Footer
         muscles={muscles}

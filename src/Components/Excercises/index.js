@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, {Fragment, useState} from "react";
 import {
   Grid,
   Paper,
@@ -9,11 +9,16 @@ import {
   ListItemSecondaryAction,
   IconButton
 } from "@material-ui/core";
-import {Delete} from "@material-ui/icons"
+import {Delete,Edit} from "@material-ui/icons"
+import InputForm from "./Dailog/InputForm";
+import {muscles} from "../../store";
 export default ({
   exercises,
   category,
   getExercise,
+  setExercise,
+  exercise,
+  editExercise,
   exercise: {
     id,
     title = "Welcome!!",
@@ -21,6 +26,8 @@ export default ({
   },
     onDelete
 }) => {
+    const [editMode,setEditMode]=useState(false)
+
   const styles = {
     Paper: {
       padding: 20,
@@ -33,6 +40,12 @@ export default ({
   const handleDelete=(id)=>{
     onDelete(id)
   }
+  const handleEdit=(id)=>{
+      setEditMode(true)
+      console.log('edit')
+      setExercise(id)
+  }
+
   return (
     <div>
       <Grid container spacing={3}>
@@ -47,15 +60,18 @@ export default ({
                   >
                     {group}
                   </Typography>
-                  <List component="ul">
+                  <List component="ul" key={group}>
                     {exercise.map(({ title, id }) => (
                       <ListItem
                         button
-                        key={id}
+                        key={title}
                         onClick={() => getExercise(id)}
                       >
                         <ListItemText primary={title} />
                         <ListItemSecondaryAction>
+                            <IconButton onClick={()=>handleEdit(id)}>
+                                <Edit/>
+                            </IconButton>
                           <IconButton edge="end" onClick={()=>handleDelete(id)}>
                             <Delete/>
                           </IconButton>
@@ -69,12 +85,18 @@ export default ({
           </Paper>
         </Grid>
         <Grid item sm>
-          <Paper style={styles.Paper}>
-            <Typography variant="h4">{title}</Typography>
-            <Typography variant="h6" style={{ marginTop: "20" }}>
-              {description}
-            </Typography>
-          </Paper>
+            {editMode
+                ?<InputForm exercise={exercise} muscles={muscles} onSubmit={editExercise}/>
+                :<Fragment>
+                    <Paper style={styles.Paper}>
+                        <Typography variant="h4">{title}</Typography>
+                        <Typography variant="h6" style={{ marginTop: "20" }}>
+                            {description}
+                        </Typography>
+                    </Paper>
+                 </Fragment>
+            }
+
         </Grid>
       </Grid>
     </div>

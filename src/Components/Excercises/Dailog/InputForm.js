@@ -9,6 +9,7 @@ import {
     TextField,
     withStyles
 } from '@material-ui/core'
+
 //styles
 const styles=(theme)=>({
     FormControl:{
@@ -16,35 +17,28 @@ const styles=(theme)=>({
     }
 })
 export default withStyles(styles) (class extends Component {
-    state={
-        exercise:{
+    state=this.initialState()
+
+    initialState(){
+        const {exercise}=this.props;
+        return exercise ? exercise : {
             title:"",
             muscles:"",
-            description: ""
-        }
-    }
-
-    /*initialState=()=>{
-        const {exercise}=this.props;
-        return exercise ? exercise :{
-            title:"",
-            muscle:"",
             description:""
         }
-    }*/
+    }
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({
-            exercise: {
-                ...this.state.exercise,
-                [name]: value,
-            },
+            [name]: value
         });
     };
     handleSubmit = () => {
-        this.props.toggle();
-        const { exercise } = this.state;
-        this.props.onCreate(exercise);
+        const {toggle}=this.props
+        toggle && this.props.toggle();
+        const { ...exercise } = this.state;
+        const id=exercise.title.replace(/ /g,'-');
+        this.props.onSubmit({...exercise,id});
         this.setState({
             exercise: {
                 title: "",
@@ -54,8 +48,9 @@ export default withStyles(styles) (class extends Component {
         });
     };
     render(){
-        const { title, muscles, description } = this.state.exercise;
+        const { title, muscles, description } = this.state;
         const { classes,muscles: categories } = this.props;
+
         return(
             <Fragment>
                 <form>
