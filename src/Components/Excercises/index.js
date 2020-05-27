@@ -9,10 +9,10 @@ import {
 } from "@material-ui/core";
 
 export default ({
-  excercises,
+  exercises,
   category,
-  getExcercise,
-  excercise: {
+  getExercise,
+  exercise: {
     id,
     title = "Welcome!!",
     description = "Please select a item from Left Pane"
@@ -32,7 +32,7 @@ export default ({
       <Grid container spacing={3}>
         <Grid item sm>
           <Paper style={styles.Paper}>
-            {excercises.map(([group, excercise]) =>
+            {exercises.map(([group, exercise]) =>
               !category || category === group ? (
                 <Fragment key={group}>
                   <Typography
@@ -42,11 +42,11 @@ export default ({
                     {group}
                   </Typography>
                   <List component="ul">
-                    {excercise.map(({ title, id }) => (
+                    {exercise.map(({ title, id }) => (
                       <ListItem
                         button
                         key={id}
-                        onClick={() => getExcercise(id)}
+                        onClick={() => getExercise(id)}
                       >
                         <ListItemText primary={title} />
                       </ListItem>

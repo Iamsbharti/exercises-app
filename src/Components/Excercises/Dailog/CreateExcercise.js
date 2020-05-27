@@ -60,10 +60,10 @@ export default class extends Component {
     this.setState({
       open: false,
     });
-    const { excercise } = this.state;
-    this.props.onCreate(excercise);
+    const { exercise } = this.state;
+    this.props.onCreate(exercise);
     this.setState({
-      excercise: {
+      exercise: {
         title: "",
         muscles: "",
         description: "",
@@ -79,7 +79,7 @@ export default class extends Component {
           <Add />
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose}>
-          <DialogTitle>Create a new Excercise</DialogTitle>
+          <DialogTitle>Create a new Exercise</DialogTitle>
           <DialogContent>
             <DialogContentText>Fill out the from</DialogContentText>
             <form>

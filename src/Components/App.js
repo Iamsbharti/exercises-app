@@ -1,54 +1,56 @@
 import React, { Fragment, useState } from "react";
 import "../styles.css";
 import { Header, Footer } from "./Layouts";
-import Excercise from "./Excercises";
+import Exercise from "./Excercises";
 import { exercises, muscles } from "../store";
 
 export default function App() {
-  const [excerciseList, setExcercises] = useState(exercises);
+  const [exerciseList, setExercises] = useState(exercises);
   const [category, setCategory] = useState("");
-  const [excercise, setExcercise] = useState({});
+  const [exercise, setExercise] = useState({});
 
-  //reduce the excerises list based on the muscles type
+  //reduce the exercises list based on the muscles type
+    //console.log(exerciseList)
+
   const getExerciseByMuscle = () => {
     return Object.entries(
-      excerciseList.reduce((excercises, excercise) => {
-        const { muscles } = excercise;
-        excercises[muscles] = excercises[muscles]
-          ? [...excercises[muscles], excercise]
-          : [excercise];
-        return excercises;
+      exerciseList.reduce((exercises, exercise) => {
+        const { muscles } = exercise;
+        exercises[muscles] = exercises[muscles]
+          ? [...exercises[muscles], exercise]
+          : [exercise];
+        return exercises;
       }, {})
     );
   };
 
-  //set the category and pass it to the excercise component to display accordingly
+  //set the category and pass it to the exercise component to display accordingly
   const handleCategory = (_category) => {
     setCategory(_category);
   };
 
-  //find the excericise selected from footer to display it's details on Right Pane
-  const handleGetExcercise = (id) => {
-    const _excerise = excerciseList.find((exer) => exer.id === id);
-    setExcercise(_excerise);
+  //find the exercise selected from footer to display it's details on Right Pane
+  const handleGetExercise = (id) => {
+    const _exercise = exerciseList.find((exer) => exer.id === id);
+    setExercise(_exercise);
   };
 
-  //create new excericise
-  const handleCreateExcercise = (newExercise) => {
-    setExcercises([...excerciseList, newExercise]);
+  //create new exercise
+  const handleCreateExercise = (newExercise) => {
+      setExercises([...exerciseList, newExercise]);
   };
 
   //call
-  const _excerises = getExerciseByMuscle();
+  const _exercises = getExerciseByMuscle();
 
   return (
     <Fragment>
-      <Header muscles={muscles} createExcercise={handleCreateExcercise} />
-      <Excercise
-        excercises={_excerises}
+      <Header muscles={muscles} createExercise={handleCreateExercise} />
+      <Exercise
+        exercises={_exercises}
         category={category}
-        getExcercise={handleGetExcercise}
-        excercise={excercise}
+        getExercise={handleGetExercise}
+        exercise={exercise}
       />
       <Footer
         muscles={muscles}
