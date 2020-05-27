@@ -14,6 +14,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+
 //styles
 const styles=(theme)=>({
   FormControl:{
@@ -54,7 +55,7 @@ export default withStyles(styles) (class extends Component {
       open: false,
     });
     const { exercise } = this.state;
-    const id=exercise.title.replace(/ g/,'-');
+
     this.props.onCreate(exercise);
 
     this.setState({

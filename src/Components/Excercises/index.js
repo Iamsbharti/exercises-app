@@ -5,9 +5,11 @@ import {
   List,
   ListItem,
   ListItemText,
-  Typography
+  Typography,
+  ListItemSecondaryAction,
+  IconButton
 } from "@material-ui/core";
-
+import {Delete} from "@material-ui/icons"
 export default ({
   exercises,
   category,
@@ -27,6 +29,10 @@ export default ({
       overflowY: "auto"
     }
   };
+  const handleDelete=(event)=>{
+    console.log('delete')
+    event.preventDefault();
+  }
   return (
     <div>
       <Grid container spacing={3}>
@@ -49,6 +55,11 @@ export default ({
                         onClick={() => getExercise(id)}
                       >
                         <ListItemText primary={title} />
+                        <ListItemSecondaryAction>
+                          <IconButton edge="end" onClick={handleDelete}>
+                            <Delete/>
+                          </IconButton>
+                        </ListItemSecondaryAction>
                       </ListItem>
                     ))}
                   </List>
