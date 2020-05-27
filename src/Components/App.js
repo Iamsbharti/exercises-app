@@ -41,7 +41,11 @@ export default function App() {
       newExercise={...newExercise,id}
       setExercises([...exerciseList, newExercise]);
   };
-
+  //delete exercise
+    const handleDeleteExercise=(id)=>{
+        const deletedExercise=exerciseList.filter(exe=> exe.id!==id)
+        setExercises(deletedExercise)
+    }
   //call
   const _exercises = getExerciseByMuscle();
 
@@ -53,6 +57,7 @@ export default function App() {
         category={category}
         getExercise={handleGetExercise}
         exercise={exercise}
+        onDelete={handleDeleteExercise}
       />
       <Footer
         muscles={muscles}

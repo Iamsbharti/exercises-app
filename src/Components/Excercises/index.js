@@ -18,7 +18,8 @@ export default ({
     id,
     title = "Welcome!!",
     description = "Please select a item from Left Pane"
-  }
+  },
+    onDelete
 }) => {
   const styles = {
     Paper: {
@@ -29,9 +30,10 @@ export default ({
       overflowY: "auto"
     }
   };
-  const handleDelete=(event)=>{
-    console.log('delete')
-    event.preventDefault();
+  const handleDelete=(id)=>{
+    console.log('delete',id)
+    onDelete(id)
+
   }
   return (
     <div>
@@ -56,7 +58,7 @@ export default ({
                       >
                         <ListItemText primary={title} />
                         <ListItemSecondaryAction>
-                          <IconButton edge="end" onClick={handleDelete}>
+                          <IconButton edge="end" onClick={()=>handleDelete(id)}>
                             <Delete/>
                           </IconButton>
                         </ListItemSecondaryAction>
