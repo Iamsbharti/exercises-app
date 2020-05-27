@@ -85,17 +85,17 @@ export default ({
           </Paper>
         </Grid>
         <Grid item sm>
+          <Paper style={styles.Paper}>
             {editMode
                 ?<InputForm exercise={exercise} muscles={muscles} onSubmit={editExercise}/>
                 :<Fragment>
-                    <Paper style={styles.Paper}>
-                        <Typography variant="h4">{title}</Typography>
-                        <Typography variant="h6" style={{ marginTop: "20" }}>
-                            {description}
-                        </Typography>
-                    </Paper>
+                    <Typography variant="h4">{title}</Typography>
+                    <Typography variant="h6" style={{ marginTop: "20" }}>
+                      {description}
+                    </Typography>
                  </Fragment>
             }
+          </Paper>
 
         </Grid>
       </Grid>
