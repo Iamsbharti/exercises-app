@@ -27,6 +27,13 @@ export default withStyles(styles) (class extends Component {
             description:""
         }
     }
+    //listen for state updates
+    componentWillReceiveProps({exercise}) {
+        this.setState({
+            ...exercise
+        })
+    }
+
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({
