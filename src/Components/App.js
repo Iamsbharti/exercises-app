@@ -13,14 +13,16 @@ export default function App() {
     //console.log(exerciseList)
 
   const getExerciseByMuscle = () => {
+    const initExercises=muscles.reduce((exercises,category)=>({
+        ...exercises,
+        [category]: []
+    }),{})
     return Object.entries(
       exerciseList.reduce((exercises, exercise) => {
         const { muscles } = exercise;
-        exercises[muscles] = exercises[muscles]
-          ? [...exercises[muscles], exercise]
-          : [exercise];
+        exercises[muscles] = [...exercises[muscles], exercise]
         return exercises;
-      }, {})
+      }, initExercises)
     );
   };
 

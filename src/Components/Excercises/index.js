@@ -31,9 +31,7 @@ export default ({
     }
   };
   const handleDelete=(id)=>{
-    console.log('delete',id)
     onDelete(id)
-
   }
   return (
     <div>
