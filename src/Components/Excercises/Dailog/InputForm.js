@@ -29,10 +29,13 @@ export default withStyles(styles) (class extends Component {
         }
     }
     //listen for state updates
-    componentWillReceiveProps({exercise}) {
-        this.setState({
-            ...exercise
-        })
+    componentDidUpdate(prevProps) {
+        if(this.props.exercise!==prevProps.exercise){
+            this.setState({
+                ...this.props.exercise
+            })    
+        }
+        
     }
 
     handleChange = (event) => {

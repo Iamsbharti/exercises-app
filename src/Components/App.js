@@ -56,7 +56,7 @@ export default function App() {
      }
      //edit exercise
     const handleEditExercise=(_newExercise)=>{
-        const editedExercise=exerciseList.filter(exercise=> exercise.id!=_newExercise.id)
+        const editedExercise=exerciseList.filter(exercise=> exercise.id!==_newExercise.id)
         setExercises([...editedExercise,_newExercise])
         setExercise(_newExercise)
     }
