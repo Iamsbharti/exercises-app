@@ -45,7 +45,7 @@ export default withStyles(styles) (class extends Component {
         const {toggle}=this.props
         toggle && this.props.toggle();
         const { ...exercise } = this.state;
-        const id=exercise.title.replace(/ /g,'-');
+        const id=exercise.title.toLocaleLowerCase().replace(/ /g,'-');
         this.props.onSubmit({...exercise,id});
         this.initialState()
     };

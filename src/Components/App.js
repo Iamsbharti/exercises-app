@@ -56,11 +56,9 @@ export default function App() {
      }
      //edit exercise
     const handleEditExercise=(_newExercise)=>{
-        console.log('edit ex',_newExercise.title)
-        const editedExercise=exerciseList.filter(exercise=> exercise.id!==_newExercise.id)
-        console.log(editedExercise)
-        setExercise(editedExercise)
+        const editedExercise=exerciseList.filter(exercise=> exercise.id!=_newExercise.id)
         setExercises([...editedExercise,_newExercise])
+        setExercise(_newExercise)
     }
 
   //call
