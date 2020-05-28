@@ -42,7 +42,6 @@ export default ({
     onDelete(id)
   }
   const handleEdit=(id)=>{
-      console.log('edit')
       setExercise(id)
   }
 
